@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ebenezer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="bg-gray-100 p-6">
+<label class="block mb-4">
+    <span class="block text-gray-700 text-lg font-semibold mb-2">Woord van God tot jou vandaag</span>
+    <input type="text" placeholder="Onthoud het goed..." maxlength="70" id="wordToRemember"
+           class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+    <button type="button" onclick="rememberWordOfGod()"
+            class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Onthouden
+    </button>
+</label>
+<ul id="listOfGodlyWords" class="list-disc pl-5">
+</ul>
+<button id="installButton" style="display: none;"
+        class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+    Install App
+</button>
+</body>
+</html>
+<script>
+    function rememberWordOfGod() {
+        let wordToRemember = document.getElementById('wordToRemember').value;
+
+        let wordsToRemember = JSON.parse(localStorage.getItem('wordsToRemember')) ?? [];
+        wordsToRemember.push(wordToRemember);
+        localStorage.setItem('wordsToRemember', JSON.stringify(wordsToRemember));
+
+        document.getElementById('wordToRemember').value = '';
+
+        displayWordsOfGod();
+    }
+
+    let displayWordsOfGod = () => {
+        document.getElementById('listOfGodlyWords').innerHTML = '';
+
+        let wordsToRemember = JSON.parse(localStorage.getItem('wordsToRemember')) ?? [];
+
+        wordsToRemember.forEach(function (singleWordOfGod) {
+            let displayElement = document.createElement('li');
+            displayElement.className = 'mt-2 text-gray-700'; // Tailwind class for list items
+
+            displayElement.innerText = singleWordOfGod;
+
+            document.getElementById('listOfGodlyWords').appendChild(displayElement);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', displayWordsOfGod);
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js').then((registration) => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, (err) => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+
+    let deferredPrompt;
+    const installButton = document.getElementById('installButton');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('beforeinstallprompt event fired');
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+
+        installButton.addEventListener('click', () => {
+            installButton.style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+    });
+</script>
