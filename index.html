@@ -25,34 +25,95 @@
 </body>
 </html>
 <script>
-    function rememberWordOfGod() {
-        let wordToRemember = document.getElementById('wordToRemember').value;
+    class WordOfGod {
+        #lesson;
+        #learntAt;
 
-        let wordsToRemember = JSON.parse(localStorage.getItem('wordsToRemember')) ?? [];
-        wordsToRemember.push(wordToRemember);
-        localStorage.setItem('wordsToRemember', JSON.stringify(wordsToRemember));
+        constructor(lesson) {
+            this.#lesson = lesson;
+            this.#learntAt = new Date();
+        }
 
-        document.getElementById('wordToRemember').value = '';
+        get lesson() {
+            return this.#lesson;
+        }
+
+        get learntAt() {
+            return this.#learntAt.toLocaleDateString('nl-NL');
+        }
+
+        asDatabaseObject() {
+            return {
+                lesson: this.#lesson,
+                learntAt: this.#learntAt
+            };
+        }
+
+        static fromDatabaseObject(databaseObject) {
+            let wordOfGod = new WordOfGod(databaseObject.lesson);
+
+            wordOfGod.#learntAt = databaseObject.learntAt;
+
+            return wordOfGod;
+        }
+    }
+
+    let applicationDatabase;
+    const openDatabaseRequest = window.indexedDB.open("ebenezer", 3);
+
+    openDatabaseRequest.onupgradeneeded = (event) => {
+        applicationDatabase = event.target.result;
+
+        applicationDatabase.createObjectStore("wordsToRemember", {autoIncrement: true});
+    };
+
+    openDatabaseRequest.onsuccess = (event) => {
+        applicationDatabase = event.target.result;
+
+        applicationDatabase.onerror = (event) => {
+            console.error(`Database error: ${event.target.error?.message}`);
+        };
 
         displayWordsOfGod();
+    };
+
+    function rememberWordOfGod() {
+        let lessonValue = document.getElementById('wordToRemember').value;
+        let wordOfGod = new WordOfGod(lessonValue);
+
+        const addToDatabaseRequest = applicationDatabase
+            .transaction(["wordsToRemember"], "readwrite")
+            .objectStore('wordsToRemember')
+            .add(wordOfGod.asDatabaseObject());
+
+        addToDatabaseRequest.onsuccess = (event) => {
+            displayWordsOfGod();
+
+            document.getElementById('wordToRemember').value = '';
+        };
     }
 
-    let displayWordsOfGod = () => {
-        document.getElementById('listOfGodlyWords').innerHTML = '';
+    function displayWordsOfGod() {
+        const getFromDatabaseRequest = applicationDatabase
+            .transaction(['wordsToRemember'], 'readonly')
+            .objectStore('wordsToRemember')
+            .getAll();
 
-        let wordsToRemember = JSON.parse(localStorage.getItem('wordsToRemember')) ?? [];
+        getFromDatabaseRequest.onsuccess = (event) => {
+            document.getElementById('listOfGodlyWords').innerHTML = '';
 
-        wordsToRemember.forEach(function (singleWordOfGod) {
-            let displayElement = document.createElement('li');
-            displayElement.className = 'mt-2 text-gray-700'; // Tailwind class for list items
+            getFromDatabaseRequest.result.forEach((databaseObject) => {
+                singleWordOfGod = WordOfGod.fromDatabaseObject(databaseObject);
 
-            displayElement.innerText = singleWordOfGod;
+                let displayElement = document.createElement('li');
 
-            document.getElementById('listOfGodlyWords').appendChild(displayElement);
-        });
+                displayElement.className = 'mt-2 text-gray-700';
+                displayElement.innerText = `${singleWordOfGod.learntAt}: ${singleWordOfGod.lesson}`;
+
+                document.getElementById('listOfGodlyWords').appendChild(displayElement);
+            });
+        };
     }
-
-    document.addEventListener('DOMContentLoaded', displayWordsOfGod);
 
     // Register service worker
     if ('serviceWorker' in navigator) {
