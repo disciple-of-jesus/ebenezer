@@ -1,151 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Ebenezer</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
+    <link href="manifest.json" rel="manifest">
 </head>
-<body class="bg-gray-100 p-6">
-<label class="block mb-4">
-    <span class="block text-gray-700 text-lg font-semibold mb-2">Woord van God tot jou vandaag</span>
-    <input type="text" placeholder="Onthoud het goed..." maxlength="70" id="wordToRemember"
-           class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-    <button type="button" onclick="rememberWordOfGod()"
-            class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Onthouden
-    </button>
-</label>
-<ul id="listOfGodlyWords" class="list-disc pl-5">
-</ul>
-<button id="installButton" style="display: none;"
-        class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-    Install App
-</button>
+<!-- This body element's children will now use the display type 'flex'. This is called the inner display type: the display type
+ of elements inside this box. The outer display type of this element is (still) 'block'. -->
+<body style="display: flex;justify-content: center;align-items: center;height: 100%;">
+<div>
+    <!-- Every HTML element has a box around it -->
+    <form>
+        <h2>Woord van God tot jou vandaag</h2>
+        <div style="margin-bottom: 20px;">
+            <label for="title" style="display: block;">Wat heeft God je laten zien?</label>
+            <input id="titleInput" maxlength="120" placeholder="Onthoud het goed..." style="display: block;" type="text"/>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="title" style="display: block;">Hoe heeft Hij dat gedaan?</label>
+            <input id="mannerInput" placeholder="Prijs Hem voor Zijn grootheid..." style="display: block;" type="text"/>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="title" style="display: block;">Welke context is hiervoor belangrijk?</label>
+            <textarea id="contextInput" placeholder="Vertel er meer over..." style="display: block;"></textarea>
+        </div>
+        <button onclick="ariseStoneOfRemembrance()" type="button">Oprichten</button>
+    </form>
+    <ul id="listOfStones"></ul>
+</div>
 </body>
 </html>
-<script>
-    class WordOfGod {
-        #lesson;
-        #learntAt;
-
-        constructor(lesson) {
-            this.#lesson = lesson;
-            this.#learntAt = new Date();
-        }
-
-        get lesson() {
-            return this.#lesson;
-        }
-
-        get learntAt() {
-            return this.#learntAt.toLocaleDateString('nl-NL');
-        }
-
-        asDatabaseObject() {
-            return {
-                lesson: this.#lesson,
-                learntAt: this.#learntAt
-            };
-        }
-
-        static fromDatabaseObject(databaseObject) {
-            let wordOfGod = new WordOfGod(databaseObject.lesson);
-
-            wordOfGod.#learntAt = databaseObject.learntAt;
-
-            return wordOfGod;
-        }
-    }
-
-    let applicationDatabase;
-    const openDatabaseRequest = window.indexedDB.open("ebenezer", 3);
-
-    openDatabaseRequest.onupgradeneeded = (event) => {
-        applicationDatabase = event.target.result;
-
-        applicationDatabase.createObjectStore("wordsToRemember", {autoIncrement: true});
-    };
-
-    openDatabaseRequest.onsuccess = (event) => {
-        applicationDatabase = event.target.result;
-
-        applicationDatabase.onerror = (event) => {
-            console.error(`Database error: ${event.target.error?.message}`);
-        };
-
-        displayWordsOfGod();
-    };
-
-    function rememberWordOfGod() {
-        let lessonValue = document.getElementById('wordToRemember').value;
-        let wordOfGod = new WordOfGod(lessonValue);
-
-        const addToDatabaseRequest = applicationDatabase
-            .transaction(["wordsToRemember"], "readwrite")
-            .objectStore('wordsToRemember')
-            .add(wordOfGod.asDatabaseObject());
-
-        addToDatabaseRequest.onsuccess = (event) => {
-            displayWordsOfGod();
-
-            document.getElementById('wordToRemember').value = '';
-        };
-    }
-
-    function displayWordsOfGod() {
-        const getFromDatabaseRequest = applicationDatabase
-            .transaction(['wordsToRemember'], 'readonly')
-            .objectStore('wordsToRemember')
-            .getAll();
-
-        getFromDatabaseRequest.onsuccess = (event) => {
-            document.getElementById('listOfGodlyWords').innerHTML = '';
-
-            getFromDatabaseRequest.result.forEach((databaseObject) => {
-                singleWordOfGod = WordOfGod.fromDatabaseObject(databaseObject);
-
-                let displayElement = document.createElement('li');
-
-                displayElement.className = 'mt-2 text-gray-700';
-                displayElement.innerText = `${singleWordOfGod.learntAt}: ${singleWordOfGod.lesson}`;
-
-                document.getElementById('listOfGodlyWords').appendChild(displayElement);
-            });
-        };
-    }
-
-    // Register service worker
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js').then((registration) => {
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, (err) => {
-                console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-    }
-
-    let deferredPrompt;
-    const installButton = document.getElementById('installButton');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        console.log('beforeinstallprompt event fired');
-        e.preventDefault();
-        deferredPrompt = e;
-        installButton.style.display = 'block';
-
-        installButton.addEventListener('click', () => {
-            installButton.style.display = 'none';
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the install prompt');
-                } else {
-                    console.log('User dismissed the install prompt');
-                }
-                deferredPrompt = null;
-            });
-        });
-    });
-</script>
+<script src="index.js"></script>
