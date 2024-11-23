@@ -16,7 +16,7 @@
     <input type="text" name="nameOfStone"/>
     <input type="text" name="wayOfShowing"/>
     <textarea name="contextToWord"></textarea>
-    <input type="submit"/>
+    <input type="submit" name="submit"/>
 </form>
 @foreach($stoneOfRemembrances as $stoneOfRemembrance)
 <div>

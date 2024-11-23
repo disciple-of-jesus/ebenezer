@@ -1,0 +1,5 @@
+integrations:
+  forge:
+    ebenhaezer.cloud:
+      site-id: 2539196
+      server-id: 862409
