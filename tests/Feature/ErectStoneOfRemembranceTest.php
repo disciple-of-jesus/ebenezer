@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Feature;
 
 use Laravel\Dusk\Browser;
 use PHPUnit\Framework\Attributes\Test;
