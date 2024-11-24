@@ -123,6 +123,23 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spresnac/laravel-create-user-cli" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/dusk" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-webdriver/webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/google/protobuf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-diactoros" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/octane" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/roadrunner-php/roadrunner-api-dto" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/goridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/hmvc" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/interceptors" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/logger" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/roadrunner-cli" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/roadrunner-http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/roadrunner-worker" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/security" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/psr-http-message-bridge" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
