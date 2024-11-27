@@ -5,37 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Ebenezer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
 
     @laravelPWA
 </head>
 <body>
-<form action="/add" method="POST">
-    @csrf
+<div class="container is-fluid">
+    <form action="/add" method="POST">
+        @csrf
 
-    <div>
-        <label for="nameOfStone">Naam</label>
-        <input type="text" name="nameOfStone"/>
-    </div>
+        <div class="field">
+            <label class="label" for="nameOfStone">Naam</label>
+            <div class="control">
+                <input class="input" type="text" name="nameOfStone"/>
+            </div>
+        </div>
 
-    <div>
-        <label for="wayOfShowing">Manier</label>
-        <input type="text" name="wayOfShowing"/>
-    </div>
+        <div class="field">
+            <label class="label" for="wayOfShowing">Manier</label>
+            <div class="control">
+                <input class="input" type="text" name="wayOfShowing"/>
+            </div>
+        </div>
 
-    <div>
-        <label for="contextToWord">Context</label>
-        <textarea name="contextToWord"></textarea>
-    </div>
+        <div class="field">
+            <label class="label" for="contextToWord">Context</label>
+            <div class="control">
+                <textarea class="textarea" name="contextToWord"></textarea>
+            </div>
+        </div>
 
-    <input type="submit" name="submit"/>
-</form>
-<ul>
+        <input class="button" type="submit" name="submit"/>
+    </form>
+
     @foreach($stoneOfRemembrances as $stoneOfRemembrance)
-    <li>
-        God heeft "{{ $stoneOfRemembrance->nameOfStone }}" laten zien via "{{ $stoneOfRemembrance->wayOfShowing }}" met
-        "{{ $stoneOfRemembrance->contextToWord }}".
-    </li>
+    <div class="content">
+        <h1>{{ $stoneOfRemembrance->nameOfStone }}</h1>
+        <p>{{ $stoneOfRemembrance->wayOfShowing }}</p>
+        <p>{{ $stoneOfRemembrance->contextToWord }}</p>
+    </div>
     @endforeach
-</ul>
+</div>
 </body>
 </html>
