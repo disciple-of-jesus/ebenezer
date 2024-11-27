@@ -16,11 +16,11 @@ class ErectStoneOfRemembranceTest extends DuskTestCase
         $contextToWord = 'I am free';
 
         $this->browse(
-            fn(Browser $browser) => $browser->loginAs('test@example.com')
+            fn (Browser $browser) => $browser->loginAs('test@example.com')
                 ->visit('/')
                 ->assertTitle('Ebenezer')
                 ->type('nameOfStone', $nameOfStone)
-                ->type('wayOfShowing', '' . $wayOfShowing . '')
+                ->type('wayOfShowing', ''.$wayOfShowing.'')
                 ->type('contextToWord', $contextToWord)
                 ->press('submit')
                 ->assertSee($nameOfStone)

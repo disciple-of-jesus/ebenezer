@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 class StoneOfRemembranceErected extends Notification
 {
     use Queueable;
-    
+
     public function __construct(private StoneOfRemembrance $stoneOfRemembrance)
     {
         //

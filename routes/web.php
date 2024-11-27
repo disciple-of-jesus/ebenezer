@@ -12,13 +12,13 @@ Route::post('/add', function (Request $request) {
     $request->validate([
         'nameOfStone' => 'required',
         'wayOfShowing' => 'required',
-        'contextToWord' => 'required'
+        'contextToWord' => 'required',
     ]);
 
     StoneOfRemembrance::create([
         'nameOfStone' => $request->string('nameOfStone'),
         'wayOfShowing' => $request->string('wayOfShowing'),
-        'contextToWord' => $request->string('contextToWord')
+        'contextToWord' => $request->string('contextToWord'),
     ]);
 
     return redirect('/');
