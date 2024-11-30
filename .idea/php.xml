@@ -136,9 +136,6 @@
       <path value="$PROJECT_DIR$/vendor/spresnac/laravel-create-user-cli" />
       <path value="$PROJECT_DIR$/vendor/silviolleite/laravelpwa" />
       <path value="$PROJECT_DIR$/vendor/php-webdriver/webdriver" />
-      <path value="$PROJECT_DIR$/vendor/laravel/octane" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-diactoros" />
-      <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
       <path value="$PROJECT_DIR$/vendor/spiral/core" />
       <path value="$PROJECT_DIR$/vendor/roadrunner-php/roadrunner-api-dto" />
       <path value="$PROJECT_DIR$/vendor/spiral/hmvc" />
@@ -184,7 +181,6 @@
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
-      <PhpStanConfiguration asDefaultInterpreter="true" tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
     </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
