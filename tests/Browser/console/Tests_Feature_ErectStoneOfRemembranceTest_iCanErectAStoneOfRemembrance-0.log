@@ -3,12 +3,12 @@
         "level": "SEVERE",
         "message": "http:\/\/ebenezer.test\/_dusk\/login\/test@example.com - Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
         "source": "network",
-        "timestamp": 1732966317853
+        "timestamp": 1734271443513
     },
     {
         "level": "SEVERE",
-        "message": "chrome-error:\/\/chromewebdata\/ - Failed to load resource: the server responded with a status of 401 ()",
+        "message": "http:\/\/ebenezer.test\/ - Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
         "source": "network",
-        "timestamp": 1732966319084
+        "timestamp": 1734271443769
     }
 ]

@@ -11,10 +11,7 @@ class StoneOfRemembranceErected extends Notification
 {
     use Queueable;
 
-    public function __construct(private StoneOfRemembrance $stoneOfRemembrance)
-    {
-        //
-    }
+    public function __construct(private StoneOfRemembrance $stoneOfRemembrance) {}
 
     /**
      * @return string[]
