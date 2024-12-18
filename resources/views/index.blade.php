@@ -9,38 +9,42 @@
 </head>
 <body>
 <div class="container is-fluid">
-    <form action="/add" method="POST">
-        @csrf
+    <div class="block">
+        <form action="/add" method="POST">
+            @csrf
 
-        <div class="field">
-            <label class="label" for="nameOfStone">Naam</label>
-            <div class="control">
-                <input class="input" type="text" name="nameOfStone"/>
+            <div class="field">
+                <label class="label" for="nameOfStone">Naam</label>
+                <div class="control">
+                    <input class="input" type="text" name="nameOfStone"/>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label" for="wayOfShowing">Manier</label>
-            <div class="control">
-                <input class="input" type="text" name="wayOfShowing"/>
+            <div class="field">
+                <label class="label" for="wayOfShowing">Manier</label>
+                <div class="control">
+                    <input class="input" type="text" name="wayOfShowing"/>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label" for="contextToWord">Context</label>
-            <div class="control">
-                <textarea class="textarea" name="contextToWord"></textarea>
+            <div class="field">
+                <label class="label" for="contextToWord">Context</label>
+                <div class="control">
+                    <textarea class="textarea" name="contextToWord"></textarea>
+                </div>
             </div>
-        </div>
 
-        <input class="button" type="submit" name="submit"/>
-    </form>
+            <input class="button" type="submit" name="submit"/>
+        </form>
+    </div>
 
     @foreach($stoneOfRemembrances as $stoneOfRemembrance)
-    <div class="content">
-        <h1>{{ $stoneOfRemembrance->nameOfStone }}</h1>
-        <p>{{ $stoneOfRemembrance->wayOfShowing }}</p>
-        <p>{{ $stoneOfRemembrance->contextToWord }}</p>
+    <div class="box">
+        <div class="content">
+            <h1>{{ $stoneOfRemembrance->nameOfStone }}</h1>
+            <p>{{ $stoneOfRemembrance->wayOfShowing }}</p>
+            <p>{{ $stoneOfRemembrance->contextToWord }}</p>
+        </div>
     </div>
     @endforeach
 </div>
