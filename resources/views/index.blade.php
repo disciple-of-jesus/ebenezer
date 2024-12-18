@@ -7,46 +7,52 @@
     <title>Ebenezer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
 </head>
-<body>
-<div class="container is-fluid">
+<body class="h-100 w-100 has-background-primary-soft">
+<div class="container is-fluid pt-5 pb-5">
     <div class="block">
-        <form action="/add" method="POST">
-            @csrf
+        <div class="box">
+            <form action="/add" method="POST">
+                @csrf
 
-            <div class="field">
-                <label class="label" for="nameOfStone">Naam</label>
-                <div class="control">
-                    <input class="input" type="text" name="nameOfStone"/>
+                <div class="field">
+                    <label class="label" for="nameOfStone">Naam</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nameOfStone"/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label class="label" for="wayOfShowing">Manier</label>
-                <div class="control">
-                    <input class="input" type="text" name="wayOfShowing"/>
+                <div class="field">
+                    <label class="label" for="wayOfShowing">Manier</label>
+                    <div class="control">
+                        <input class="input" type="text" name="wayOfShowing"/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label class="label" for="contextToWord">Context</label>
-                <div class="control">
-                    <textarea class="textarea" name="contextToWord"></textarea>
+                <div class="field">
+                    <label class="label" for="contextToWord">Context</label>
+                    <div class="control">
+                        <textarea class="textarea" name="contextToWord"></textarea>
+                    </div>
                 </div>
-            </div>
 
-            <input class="button" type="submit" name="submit"/>
-        </form>
+                <input class="button" type="submit" name="submit"/>
+            </form>
+        </div>
     </div>
 
     @foreach($stoneOfRemembrances as $stoneOfRemembrance)
-    <div class="box">
-        <div class="content">
-            <h1>{{ $stoneOfRemembrance->nameOfStone }}</h1>
-            <p>{{ $stoneOfRemembrance->wayOfShowing }}</p>
-            <p>{{ $stoneOfRemembrance->contextToWord }}</p>
+    @if($loop->last)
+    <div class="box mb-0">
+        @else
+        <div class="box">
+            @endif
+            <div class="content">
+                <h1>{{ $stoneOfRemembrance->nameOfStone }}</h1>
+                <p>{{ $stoneOfRemembrance->wayOfShowing }}</p>
+                <p>{{ $stoneOfRemembrance->contextToWord }}</p>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 </body>
 </html>
