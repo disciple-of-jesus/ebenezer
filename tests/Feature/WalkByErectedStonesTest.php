@@ -29,7 +29,11 @@ class WalkByErectedStonesTest extends TestCase
 
         Notification::assertSentTo(
             notifiable: $user,
-            notification: fn (StoneOfRemembranceErected $notification) => true
+            notification: function (StoneOfRemembranceErected $notification) {
+                $mailTransport = $notification->toMail();
+
+                return $mailTransport->subject === "Do you remember God's lesson for you?";
+            }
         );
     }
 }
