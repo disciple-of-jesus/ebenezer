@@ -1,0 +1,15 @@
+$platinum: #CCDBDC;
+$non-photo-blue: #9AD1D4;
+$brown: #757763;
+$cerulean: #007EA7;
+$prussian-blue: #003249;
+
+@use "bulma/sass" with (
+  $family-primary: '"Nunito", sans-serif',
+  $grey-dark: $brown,
+  $grey-light: $cerulean,
+  $primary: $platinum,
+  $link: $non-photo-blue,
+  $control-border-width: 2px,
+  $input-shadow: none
+);

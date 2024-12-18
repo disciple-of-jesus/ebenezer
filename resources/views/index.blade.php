@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Ebenezer</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="/dist/app.css">
 </head>
 <body class="h-100 w-100 has-background-primary-soft">
 <div class="container is-fluid pt-5 pb-5">
