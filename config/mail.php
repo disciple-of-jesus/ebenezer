@@ -29,23 +29,24 @@ return [
     | when delivering an email. You may specify which one you're using for
     | your mailers below. You may also add additional mailers if needed.
     |
-    | Supported: "array", "smtp", "log"
+    | Supported: "array", "sendmail", "smtp"
     |
     */
 
     'mailers' => [
 
         'array' => [
-            'transport' => 'array'
+            'transport' => 'array',
+        ],
+
+        'sendmail' => [
+            'transport' => 'sendmail',
+            'path' => '/usr/sbin/sendmail -bs -i',
         ],
 
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
-        ],
-
-        'log' => [
-            'transport' => 'log',
         ],
 
     ],
