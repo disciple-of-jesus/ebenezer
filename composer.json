@@ -11,7 +11,9 @@
   "require": {
     "php": "^8.3",
     "laravel/framework": "^11.31",
+    "laravel/reverb": "^1.0",
     "laravel/tinker": "^2.9",
+    "silviolleite/laravelpwa": "^2.0",
     "spresnac/laravel-create-user-cli": "^1.0"
   },
   "require-dev": {

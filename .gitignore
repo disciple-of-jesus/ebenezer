@@ -3,6 +3,7 @@
 /public/mix-manifest.json
 /public/dist
 /public/hot
+/public/serviceworker.js
 /public/storage
 /storage/*.key
 /storage/pail

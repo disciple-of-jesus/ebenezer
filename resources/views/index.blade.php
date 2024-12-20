@@ -6,6 +6,9 @@
 
     <title>Ebenezer</title>
     <link rel="stylesheet" href="/dist/app.css">
+    <script src="/dist/echo.js"></script>
+
+    @laravelPWA
 </head>
 <body class="h-100 w-100 has-background-primary-soft">
 <div class="container is-fluid pt-5 pb-5">
@@ -56,3 +59,11 @@
     </div>
 </body>
 </html>
+<script async>
+    window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
+        .notification((notification) => {
+            new Notification(notification.nameOfStone, {
+                body: `${notification.wayOfShowing} ${notification.contextToWord}`
+            });
+        });
+</script>

@@ -5,27 +5,30 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index', ['stoneOfRemembrances' => StoneOfRemembrance::all()]);
-})->middleware('auth.basic');
+Route::middleware('auth.basic')->group(function () {
+    Route::get('/', function () {
+        return view('index', ['stoneOfRemembrances' => StoneOfRemembrance::all()]);
+    });
 
-Route::post('/add', function (Request $request) {
-    $request->validate([
-        'nameOfStone' => 'required',
-        'wayOfShowing' => 'required',
-        'contextToWord' => 'required',
-    ]);
+    Route::post('/add', function (Request $request) {
+        $request->validate([
+            'nameOfStone' => 'required',
+            'wayOfShowing' => 'required',
+            'contextToWord' => 'required',
+        ]);
 
-    $stoneOfRemembrance = new StoneOfRemembrance([
-        'nameOfStone' => $request->string('nameOfStone'),
-        'wayOfShowing' => $request->string('wayOfShowing'),
-        'contextToWord' => $request->string('contextToWord'),
-    ]);
+        $stoneOfRemembrance = new StoneOfRemembrance([
+            'nameOfStone' => $request->string('nameOfStone'),
+            'wayOfShowing' => $request->string('wayOfShowing'),
+            'contextToWord' => $request->string('contextToWord'),
+        ]);
 
-    /** @var User $authenticatedUser */
-    $authenticatedUser = $request->user();
+        /** @var User $authenticatedUser */
+        $authenticatedUser = $request->user();
 
-    $authenticatedUser->stonesOfRemembrance()->save($stoneOfRemembrance);
+        $authenticatedUser->stonesOfRemembrance()->save($stoneOfRemembrance);
 
-    return redirect('/');
-})->middleware('auth.basic');
+        return redirect('/');
+    });
+
+});
