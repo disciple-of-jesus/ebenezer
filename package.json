@@ -8,7 +8,8 @@
   },
   "scripts": {
     "development": "npx mix",
-    "production": "npx mix --production"
+    "production": "npx mix --production",
+    "watch": "npx mix --watch"
   },
   "keywords": [],
   "author": "",
