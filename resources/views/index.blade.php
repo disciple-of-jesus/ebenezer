@@ -6,7 +6,6 @@
 
     <title>Ebenezer</title>
     <link rel="stylesheet" href="/dist/app.css">
-    <script src="/dist/echo.js"></script>
 
     @laravelPWA
 </head>
@@ -59,7 +58,10 @@
     </div>
 </body>
 </html>
+<script src="/dist/echo.js"></script>
 <script async>
+    Notification.requestPermission();
+
     window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
         .notification((notification) => {
             new Notification(notification.nameOfStone, {

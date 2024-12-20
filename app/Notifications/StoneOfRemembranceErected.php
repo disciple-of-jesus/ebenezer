@@ -9,9 +9,7 @@ use Illuminate\Notifications\Notification;
 
 class StoneOfRemembranceErected extends Notification
 {
-    public function __construct(private StoneOfRemembrance $stoneOfRemembrance)
-    {
-    }
+    public function __construct(private StoneOfRemembrance $stoneOfRemembrance) {}
 
     /**
      * @return string[]

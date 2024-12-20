@@ -12,5 +12,3 @@ window.Echo = new Echo({
     forceTLS: (process.env.MIX_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
-
-Notification.requestPermission();
