@@ -57,5 +57,7 @@ return [
             '1668x2388' => '/images/icons/splash-1668x2388.png',
             '2048x2732' => '/images/icons/splash-2048x2732.png',
         ],
+        'shortcuts' => [],
+        'custom' => []
     ],
 ];
