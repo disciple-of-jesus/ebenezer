@@ -47,8 +47,8 @@
         <div class="box">
             @endif
             <div class="content">
-                <h1>{{ $stoneOfRemembrance->nameOfStone }}</h1>
-                <p>{{ $stoneOfRemembrance->wayOfShowing }}</p>
+                <h1 class="is-uppercase">{{ $stoneOfRemembrance->nameOfStone }}</h1>
+                <p class="is-italic">{{ $stoneOfRemembrance->wayOfShowing }}</p>
                 <p>{{ $stoneOfRemembrance->contextToWord }}</p>
             </div>
         </div>
