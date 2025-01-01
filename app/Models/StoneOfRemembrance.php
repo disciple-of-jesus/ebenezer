@@ -14,10 +14,12 @@ class StoneOfRemembrance extends Model
 
     public $timestamps = false;
 
+    protected $table = 'stones_of_remembrance';
+
     protected $fillable = ['nameOfStone', 'wayOfShowing', 'contextToWord'];
 
-    public function user(): BelongsTo
+    public function space(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Space::class);
     }
 }

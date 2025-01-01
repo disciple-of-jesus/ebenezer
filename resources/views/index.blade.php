@@ -13,7 +13,7 @@
 <div class="container is-fluid pt-5 pb-5">
     <div class="block">
         <div class="box">
-            <form action="/add" method="POST">
+            <form action="{{ route('erect-stone-of-remembrance', [ 'space' => $space->id ]) }}" method="POST">
                 @csrf
 
                 <div class="field">
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    @foreach($stoneOfRemembrances as $stoneOfRemembrance)
+    @foreach($space->stonesOfRemembrance as $stoneOfRemembrance)
     @if($loop->last)
     <div class="box mb-0">
         @else
@@ -62,7 +62,7 @@
 <script async>
     Notification.requestPermission();
 
-    window.Echo.private('App.Models.User.{{ Auth::user()->id }}')
+    window.Echo.private('App.Models.Space.{{ $space->id }}')
         .notification((notification) => {
             new Notification(notification.nameOfStone, {
                 body: `${notification.wayOfShowing} ${notification.contextToWord}`

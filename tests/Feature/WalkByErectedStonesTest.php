@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Space;
 use App\Models\StoneOfRemembrance;
-use App\Models\User;
 use App\Notifications\StoneOfRemembranceErected;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
@@ -19,20 +19,28 @@ class WalkByErectedStonesTest extends TestCase
     {
         Notification::fake();
 
-        $user = User::factory()->create();
-        $stoneOfRemembrance = StoneOfRemembrance::factory()->make();
-        $user->stonesOfRemembrance()->save($stoneOfRemembrance);
+        $space = Space::factory()->createOne();
+
+        $stoneOfRemembrance = StoneOfRemembrance::factory()->makeOne([
+            'nameOfStone' => 'God desires full surrender',
+            'wayOfShowing' => 'Me running in circles, YouTube videos, my mentor',
+            'contextToWord' => 'I cannot bring forth fruit on my own. Only God can do a work in me. He desires complete surrender, because He will not do anything that I do not want.',
+        ]);
+
+        $space->stonesOfRemembrance()->save($stoneOfRemembrance);
 
         $this->artisan('schedule:test')
             ->expectsQuestion('Which command would you like to run?', 'Callback')
             ->assertSuccessful();
 
         Notification::assertSentTo(
-            notifiable: $user,
+            notifiable: $space,
             notification: function (StoneOfRemembranceErected $notification) {
-                $mailTransport = $notification->toMail();
+                $broadcastedNotification = $notification->toBroadcast();
 
-                return $mailTransport->subject === "Do you remember God's lesson for you?";
+                return $broadcastedNotification->data['nameOfStone'] === 'God desires full surrender'
+                    && $broadcastedNotification->data['wayOfShowing'] === 'Me running in circles, YouTube videos, my mentor'
+                    && $broadcastedNotification->data['contextToWord'] === 'I cannot bring forth fruit on my own. Only God can do a work in me. He desires complete surrender, because He will not do anything that I do not want.';
             }
         );
     }

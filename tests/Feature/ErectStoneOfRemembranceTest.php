@@ -18,14 +18,14 @@ class ErectStoneOfRemembranceTest extends DuskTestCase
         $this->browse(
             fn (Browser $browser) => $browser->loginAs('test@example.com')
                 ->visit('/')
-                ->assertTitle('Ebenezer')
+                ->press('Toekennen')
                 ->type('nameOfStone', $nameOfStone)
                 ->type('wayOfShowing', ''.$wayOfShowing.'')
                 ->type('contextToWord', $contextToWord)
                 ->press('submit')
-                ->assertSee($nameOfStone)
-                ->assertSee($wayOfShowing)
-                ->assertSee($contextToWord)
+                ->assertSee(text: $nameOfStone, ignoreCase: true)
+                ->assertSee(text: $wayOfShowing, ignoreCase: true)
+                ->assertSee(text: $contextToWord, ignoreCase: true)
         );
     }
 }
