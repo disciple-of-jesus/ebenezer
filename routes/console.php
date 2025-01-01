@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Notification;
 
 Schedule::call(function () {
     foreach (StoneOfRemembrance::all() as $stoneOfRemembrance) {
-        Notification::sendNow(
-            notifiables: $stoneOfRemembrance->user,
+        Notification::send(
+            notifiables: $stoneOfRemembrance->space,
             notification: new StoneOfRemembranceErected($stoneOfRemembrance)
         );
     }
