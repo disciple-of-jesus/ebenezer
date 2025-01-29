@@ -1,14 +1,14 @@
-var staticCacheName = "pwa-v" + new Date().getTime();
-var filesToCache = [
-    '/',
+const staticCacheName = "pwa-v" + new Date().getTime();
+const filesToCache = [
     '/dist/app.css',
-    '/dist/echo.js',
-    '/manifest.json'
+    '/manifest.json',
+    '/mix-manifest.json'
 ];
 
 // Cache on install
 self.addEventListener("install", event => {
     this.skipWaiting();
+
     event.waitUntil(
         caches.open(staticCacheName)
             .then(cache => {

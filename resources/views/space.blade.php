@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <input class="button" type="submit" name="submit"/>
+            <input class="button" type="submit" name="Oprichten"/>
         </form>
     </div>
 </div>

@@ -22,7 +22,7 @@ class ErectStoneOfRemembranceTest extends DuskTestCase
                 ->type('nameOfStone', $nameOfStone)
                 ->type('wayOfShowing', ''.$wayOfShowing.'')
                 ->type('contextToWord', $contextToWord)
-                ->press('submit')
+                ->press('Oprichten')
                 ->assertSee(text: $nameOfStone, ignoreCase: true)
                 ->assertSee(text: $wayOfShowing, ignoreCase: true)
                 ->assertSee(text: $contextToWord, ignoreCase: true)
