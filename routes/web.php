@@ -14,7 +14,7 @@ Route::post('/spaces', function () {
 })->name('assign-space-to-erect-stones');
 
 Route::get('/spaces/{space}', function (Space $space) {
-    return view('index', ['space' => $space]);
+    return view('space', ['space' => $space]);
 })->name('walk-by-erected-stones');
 
 Route::post('/spaces/{space}/stones-of-remembrance', function (Space $space, Request $request) {

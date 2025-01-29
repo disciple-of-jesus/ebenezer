@@ -10,7 +10,8 @@ $prussian-blue: #003249;
   $text: $prussian-blue,
 );
 
-:root {
+body {
   // Make sure the entire (web) page is used
   min-height: 100vh;
+  min-width: 100vw;
 }
