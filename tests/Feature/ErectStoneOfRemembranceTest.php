@@ -26,6 +26,12 @@ class ErectStoneOfRemembranceTest extends DuskTestCase
                 ->assertSee(text: $nameOfStone, ignoreCase: true)
                 ->assertSee(text: $wayOfShowing, ignoreCase: true)
                 ->assertSee(text: $contextToWord, ignoreCase: true)
+                ->type(field: 'query', value: 'Query will not yield results')
+                ->press('Zoeken')
+                ->assertDontSee(text: $nameOfStone, ignoreCase: true)
+                ->type(field: 'query', value: 'Work')
+                ->press('Zoeken')
+                ->assertSee(text: $nameOfStone, ignoreCase: true)
         );
     }
 }

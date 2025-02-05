@@ -13,8 +13,16 @@ Route::post('/spaces', function () {
     return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
 })->name('assign-space-to-erect-stones');
 
-Route::get('/spaces/{space}', function (Space $space) {
-    return view('space', ['space' => $space]);
+Route::get('/spaces/{space}', function (Space $space, Request $request) {
+    if ($query = $request->query('query')) {
+        $listOfStones = StoneOfRemembrance::search($query)
+            ->where(field: 'space_id', value: $space->id)
+            ->get();
+    } else {
+        $listOfStones = $space->stonesOfRemembrance()->get();
+    }
+
+    return view('space', ['space' => $space, 'stonesOfRemembrance' => $listOfStones]);
 })->name('walk-by-erected-stones');
 
 Route::post('/spaces/{space}/stones-of-remembrance', function (Space $space, Request $request) {

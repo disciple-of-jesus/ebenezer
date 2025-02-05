@@ -27,12 +27,23 @@
                 </div>
             </div>
 
-            <input class="button" name="submit" type="submit" value="Oprichten"/>
+            <input class="button" name="erect" type="submit" value="Oprichten"/>
+        </form>
+        <hr/>
+        <form>
+            <div class="field">
+                <label class="label" for="query">Waarde</label>
+                <div class="control">
+                    <input class="input" type="text" name="query"/>
+                </div>
+            </div>
+
+            <input class="button" name="search" type="submit" value="Zoeken"/>
         </form>
     </div>
 </div>
 
-@foreach($space->stonesOfRemembrance as $stoneOfRemembrance)
+@foreach($stonesOfRemembrance as $stoneOfRemembrance)
 @if($loop->last)
 <div class="box mb-0">
     @else

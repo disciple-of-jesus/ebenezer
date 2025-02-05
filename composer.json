@@ -10,7 +10,8 @@
   "license": "MIT",
   "require": {
     "php": "^8.3",
-    "laravel/framework": "^11.31"
+    "laravel/framework": "^11.31",
+    "laravel/scout": "^10.12"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^3.2",
