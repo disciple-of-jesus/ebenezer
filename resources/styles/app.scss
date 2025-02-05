@@ -9,3 +9,9 @@ $prussian-blue: #003249;
   $primary: $cerulean,
   $text: $prussian-blue,
 );
+
+body {
+  // Make sure the entire (web) page is used
+  min-height: 100vh;
+  min-width: 100vw;
+}

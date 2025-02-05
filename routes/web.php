@@ -1,34 +1,36 @@
 <?php
 
+use App\Models\Space;
 use App\Models\StoneOfRemembrance;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth.basic')->group(function () {
-    Route::get('/', function () {
-        return view('index', ['stoneOfRemembrances' => StoneOfRemembrance::all()]);
-    });
+Route::get('/', fn () => view('welcome'));
 
-    Route::post('/add', function (Request $request) {
-        $request->validate([
-            'nameOfStone' => 'required',
-            'wayOfShowing' => 'required',
-            'contextToWord' => 'required',
-        ]);
+Route::post('/spaces', function () {
+    $space = Space::create();
 
-        $stoneOfRemembrance = new StoneOfRemembrance([
-            'nameOfStone' => $request->string('nameOfStone'),
-            'wayOfShowing' => $request->string('wayOfShowing'),
-            'contextToWord' => $request->string('contextToWord'),
-        ]);
+    return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
+})->name('assign-space-to-erect-stones');
 
-        /** @var User $authenticatedUser */
-        $authenticatedUser = $request->user();
+Route::get('/spaces/{space}', function (Space $space) {
+    return view('space', ['space' => $space]);
+})->name('walk-by-erected-stones');
 
-        $authenticatedUser->stonesOfRemembrance()->save($stoneOfRemembrance);
+Route::post('/spaces/{space}/stones-of-remembrance', function (Space $space, Request $request) {
+    $request->validate([
+        'nameOfStone' => 'required',
+        'wayOfShowing' => 'required',
+        'contextToWord' => 'required',
+    ]);
 
-        return redirect('/');
-    });
+    $stoneOfRemembrance = new StoneOfRemembrance([
+        'nameOfStone' => $request->string('nameOfStone'),
+        'wayOfShowing' => $request->string('wayOfShowing'),
+        'contextToWord' => $request->string('contextToWord'),
+    ]);
 
-});
+    $space->stonesOfRemembrance()->save($stoneOfRemembrance);
+
+    return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
+})->name('erect-stone-of-remembrance');
