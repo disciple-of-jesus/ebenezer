@@ -10,18 +10,14 @@
   "license": "MIT",
   "require": {
     "php": "^8.3",
-    "laravel/framework": "^11.31",
-    "laravel/tinker": "^2.9",
-    "spresnac/laravel-create-user-cli": "^1.0"
+    "laravel/framework": "^11.31"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^3.2",
     "driftingly/rector-laravel": "^1.2",
-    "fakerphp/faker": "^1.23",
     "larastan/larastan": "^2.9",
     "laravel/dusk": "^8.2",
     "laravel/pint": "^1.13",
-    "mockery/mockery": "^1.6",
     "nunomaduro/collision": "^8.5",
     "phpunit/phpunit": "^11.0.1"
   },
