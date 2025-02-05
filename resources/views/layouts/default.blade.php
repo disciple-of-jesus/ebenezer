@@ -6,8 +6,6 @@
 
     <title>Ebenezer</title>
     <link rel="stylesheet" href="/dist/app.css">
-
-    @laravelPWA
 </head>
 <body class="has-background-primary-soft">
 <div class="container is-fluid pt-5 pb-5">

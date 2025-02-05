@@ -3,6 +3,6 @@
         "level": "SEVERE",
         "message": "http:\/\/ebenezer.test\/favicon.ico - Failed to load resource: the server responded with a status of 404 (Not Found)",
         "source": "network",
-        "timestamp": 1738161957068
+        "timestamp": 1738770861863
     }
 ]

@@ -10,7 +10,7 @@ Route::get('/', fn () => view('welcome'));
 Route::post('/spaces', function () {
     $space = Space::create();
 
-    return redirect("/spaces/$space->id");
+    return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
 })->name('assign-space-to-erect-stones');
 
 Route::get('/spaces/{space}', function (Space $space) {
@@ -32,5 +32,5 @@ Route::post('/spaces/{space}/stones-of-remembrance', function (Space $space, Req
 
     $space->stonesOfRemembrance()->save($stoneOfRemembrance);
 
-    return redirect(route('walk-by-erected-stones', ['space' => $space->id]));
+    return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
 })->name('erect-stone-of-remembrance');
