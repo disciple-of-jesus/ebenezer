@@ -10,7 +10,15 @@ class StoneOfRemembrance extends Model
 {
     use Searchable;
 
-    public $timestamps = false;
+    /**
+     * @var string
+     */
+    const string CREATED_AT = 'erectedAt';
+
+    /**
+     * @var string
+     */
+    const string UPDATED_AT = 'movedAt';
 
     protected $table = 'stones_of_remembrance';
 

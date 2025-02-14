@@ -11,27 +11,22 @@ class ErectStoneOfRemembranceTest extends DuskTestCase
     #[Test]
     public function iCanErectAStoneOfRemembrance(): void
     {
-        $nameOfStone = 'I am free to enjoy works that fit who I am';
-        $wayOfShowing = 'By granting me His peace over developing software, making music and through my teacher';
-        $contextToWord = 'I am free';
-
         $this->browse(
-            fn (Browser $browser) => $browser->loginAs('test@example.com')
-                ->visit('/')
+            fn (Browser $browser) => $browser->visit('/')
                 ->press('Toekennen')
-                ->type('nameOfStone', $nameOfStone)
-                ->type('wayOfShowing', ''.$wayOfShowing.'')
-                ->type('contextToWord', $contextToWord)
-                ->press('Oprichten')
-                ->assertSee(text: $nameOfStone, ignoreCase: true)
-                ->assertSee(text: $wayOfShowing, ignoreCase: true)
-                ->assertSee(text: $contextToWord, ignoreCase: true)
+                ->type('nameOfStone', 'Ik mag genieten van Uw werken die bij mij passen')
+                ->type('wayOfShowing', 'Het geven van Uw vrede over mijn werk op mijn manier')
+                ->type('contextToWord', 'Ik ben vrij')
+                ->clickAndWaitForReload('#erectStoneButton')
+                ->assertSee(text: 'Ik mag genieten van Uw werken die bij mij passen', ignoreCase: true)
+                ->assertSee(text: 'door het geven van Uw vrede over mijn werk op mijn manier', ignoreCase: true)
+                ->assertSee(text: 'Ik ben vrij', ignoreCase: true)
                 ->type(field: 'query', value: 'Query will not yield results')
-                ->press('Zoeken')
-                ->assertDontSee(text: $nameOfStone, ignoreCase: true)
-                ->type(field: 'query', value: 'Work')
-                ->press('Zoeken')
-                ->assertSee(text: $nameOfStone, ignoreCase: true)
+                ->clickAndWaitForReload('#walkByStonesButton')
+                ->assertDontSee(text: 'Ik mag genieten van Uw werken die bij mij passen', ignoreCase: true)
+                ->type(field: 'query', value: 'werk')
+                ->clickAndWaitForReload('#walkByStonesButton')
+                ->assertSee(text: 'Ik mag genieten van Uw werken die bij mij passen', ignoreCase: true)
         );
     }
 }

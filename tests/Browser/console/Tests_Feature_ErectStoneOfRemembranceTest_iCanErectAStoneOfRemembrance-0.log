@@ -1,14 +1,8 @@
 [
     {
         "level": "SEVERE",
-        "message": "http:\/\/ebenezer.test\/_dusk\/login\/test@example.com - Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
-        "source": "network",
-        "timestamp": 1739561080898
-    },
-    {
-        "level": "SEVERE",
         "message": "http:\/\/ebenezer.test\/favicon.ico - Failed to load resource: the server responded with a status of 404 (Not Found)",
         "source": "network",
-        "timestamp": 1739561084343
+        "timestamp": 1739562120178
     }
 ]

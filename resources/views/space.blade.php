@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <input class="button" name="erect" type="submit" value="Oprichten"/>
+            <input class="button" id="erectStoneButton" name="erect" type="submit" value="Oprichten"/>
         </form>
         <hr/>
         <form>
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <input class="button" name="search" type="submit" value="Zoeken"/>
+            <input class="button" id="walkByStonesButton" name="search" type="submit" value="Zoeken"/>
         </form>
     </div>
 </div>
@@ -51,7 +51,14 @@
         @endif
         <div class="content">
             <h1 class="is-uppercase">{{ $stoneOfRemembrance->nameOfStone }}</h1>
-            <p class="is-italic">{{ $stoneOfRemembrance->wayOfShowing }}</p>
+            <p class="is-italic">
+                @if($stoneOfRemembrance->erectedAt)
+                Op {{ $stoneOfRemembrance->erectedAt->format('d-m-Y H:i') }}
+                door {{ lcfirst($stoneOfRemembrance->wayOfShowing) }}
+                @else
+                {{ $stoneOfRemembrance->wayOfShowing }}
+                @endif
+            </p>
             <p>{{ $stoneOfRemembrance->contextToWord }}</p>
         </div>
     </div>
