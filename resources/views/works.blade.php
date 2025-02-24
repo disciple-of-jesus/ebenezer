@@ -12,7 +12,9 @@
 
 <ul>
     @foreach($works as $work)
-    <li>{{ $work->assignedAt }}, {{ $work->lastToiledAt }}, {{ $work->nameOfWork }}</li>
+    <li>
+        {{ $work->assignedAt }}, {{ $work->lastToiledAt }}, {{ $work->nameOfWork }}
+    </li>
     @endforeach
 </ul>
 @endsection

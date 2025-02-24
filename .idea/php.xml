@@ -3,6 +3,7 @@
   <component name="LaravelPint">
     <laravel_pint_settings>
       <LaravelPintConfiguration tool_path="$PROJECT_DIR$/vendor/bin/pint" />
+      <LaravelPintConfiguration asDefaultInterpreter="true" tool_path="$PROJECT_DIR$/vendor/bin/pint" />
     </laravel_pint_settings>
   </component>
   <component name="MessDetector">
@@ -24,6 +25,9 @@
     <phpcs_settings>
       <PhpCSConfiguration asDefaultInterpreter="true" />
     </phpcs_settings>
+  </component>
+  <component name="PhpExternalFormatter">
+    <option name="externalFormatter" value="LARAVEL_PINT" />
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
@@ -154,6 +158,7 @@
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
+      <PhpStanConfiguration asDefaultInterpreter="true" tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
     </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
