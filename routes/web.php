@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Effort;
 use App\Models\Space;
 use App\Models\StoneOfRemembrance;
 use App\Models\Work;
@@ -59,3 +60,13 @@ Route::post('/works', function (Request $request) {
 
     return redirect(route('enjoy-the-good'));
 })->name('assign-godly-work');
+
+Route::post('/works/{work}/effort', function (Work $work, Request $request) {
+    $effort = new Effort([
+        'summaryOfEffort' => $request->string('summaryOfEffort'),
+    ]);
+
+    $work->effort()->save($effort);
+
+    return redirect(route('enjoy-the-good'));
+})->name('enjoy-the-effort');

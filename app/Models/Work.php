@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Work extends Model
 {
@@ -20,6 +21,11 @@ class Work extends Model
     const string UPDATED_AT = 'lastToiledAt';
 
     protected $fillable = ['nameOfWork'];
+
+    public function effort(): HasMany
+    {
+        return $this->hasMany(Effort::class);
+    }
 
     protected function casts(): array
     {

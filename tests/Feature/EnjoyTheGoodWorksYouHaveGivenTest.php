@@ -17,6 +17,9 @@ class EnjoyTheGoodWorksYouHaveGivenTest extends DuskTestCase
                 ->type('nameOfWork', 'Nieuwsbrief van Yachad versturen')
                 ->clickAndWaitForReload('#assignWork')
                 ->assertSee(text: 'Nieuwsbrief van Yachad versturen', ignoreCase: true)
+                ->type('summaryOfEffort', 'Mail bekeken van Jan-Henk Soepenberg')
+                ->clickAndWaitForReload('#enjoyEffort')
+                ->assertSee('Mail bekeken van Jan-Henk Soepenberg')
         );
     }
 }
