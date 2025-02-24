@@ -2,10 +2,11 @@
 
 use App\Models\Space;
 use App\Models\StoneOfRemembrance;
+use App\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => view('welcome'));
+Route::get('/', fn() => view('welcome'));
 
 Route::post('/spaces', function () {
     $space = Space::create();
@@ -42,3 +43,19 @@ Route::post('/spaces/{space}/stones-of-remembrance', function (Space $space, Req
 
     return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
 })->name('erect-stone-of-remembrance');
+
+Route::get('/works', function () {
+    $works = Work::all();
+
+    return view('works', ['works' => $works]);
+})->name('enjoy-the-good');
+
+Route::post('/works', function (Request $request) {
+    $work = new Work([
+        'nameOfWork' => $request->string('nameOfWork'),
+    ]);
+
+    $work->save();
+
+    return redirect(route('enjoy-the-good'));
+})->name('assign-godly-work');
