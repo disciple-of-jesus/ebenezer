@@ -3,7 +3,6 @@
   <component name="LaravelPint">
     <laravel_pint_settings>
       <LaravelPintConfiguration tool_path="$PROJECT_DIR$/vendor/bin/pint" />
-      <LaravelPintConfiguration asDefaultInterpreter="true" tool_path="$PROJECT_DIR$/vendor/bin/pint" />
     </laravel_pint_settings>
   </component>
   <component name="MessDetector">
@@ -154,7 +153,7 @@
       <path value="$PROJECT_DIR$/vendor/laravel/scout" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
