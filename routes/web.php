@@ -6,7 +6,7 @@ use App\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn () => view('welcome'));
 
 Route::post('/spaces', function () {
     $space = Space::create();
