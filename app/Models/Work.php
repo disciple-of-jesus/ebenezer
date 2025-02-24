@@ -20,4 +20,11 @@ class Work extends Model
     const string UPDATED_AT = 'lastToiledAt';
 
     protected $fillable = ['nameOfWork'];
+
+    protected function casts(): array
+    {
+        return [
+            'nameOfWork' => 'encrypted',
+        ];
+    }
 }
