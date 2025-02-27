@@ -1,80 +1,25 @@
 <?php
 
-use App\Models\Effort;
-use App\Models\Space;
-use App\Models\StoneOfRemembrance;
-use App\Models\Work;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AssignGodlyWork;
+use App\Http\Controllers\AssignSpaceToErectStones;
+use App\Http\Controllers\ChangeTheCurrentState;
+use App\Http\Controllers\EnjoyTheEffort;
+use App\Http\Controllers\EnjoyTheGoodWorks;
+use App\Http\Controllers\ErectStoneOfRemembrance;
+use App\Http\Controllers\WalkByErectStones;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('welcome'));
 
-Route::post('/spaces', function () {
-    $space = Space::create();
+Route::prefix('/spaces')->group(function () {
+    Route::name('assign-space-to-erect-stones')->post('', AssignSpaceToErectStones::class);
+    Route::name('walk-by-erected-stones')->get('/{space}', WalkByErectStones::class);
+    Route::name('erect-stone-of-remembrance')->post('/{space}/stones-of-remembrance', ErectStoneOfRemembrance::class);
+});
 
-    return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
-})->name('assign-space-to-erect-stones');
-
-Route::get('/spaces/{space}', function (Space $space, Request $request) {
-    if ($query = $request->query('query')) {
-        $listOfStones = StoneOfRemembrance::search($query)
-            ->where(field: 'space_id', value: $space->id)
-            ->get();
-    } else {
-        $listOfStones = $space->stonesOfRemembrance()->get();
-    }
-
-    return view('space', ['space' => $space, 'stonesOfRemembrance' => $listOfStones]);
-})->name('walk-by-erected-stones');
-
-Route::post('/spaces/{space}/stones-of-remembrance', function (Space $space, Request $request) {
-    $request->validate([
-        'nameOfStone' => 'required',
-        'wayOfShowing' => 'required',
-        'contextToWord' => 'required',
-    ]);
-
-    $stoneOfRemembrance = new StoneOfRemembrance([
-        'nameOfStone' => $request->string('nameOfStone'),
-        'wayOfShowing' => $request->string('wayOfShowing'),
-        'contextToWord' => $request->string('contextToWord'),
-    ]);
-
-    $space->stonesOfRemembrance()->save($stoneOfRemembrance);
-
-    return redirect(route(name: 'walk-by-erected-stones', parameters: ['space' => $space->id]));
-})->name('erect-stone-of-remembrance');
-
-Route::get('/works', function () {
-    $works = Work::all();
-
-    return view('works', ['works' => $works]);
-})->name('enjoy-the-good');
-
-Route::post('/works', function (Request $request) {
-    $work = new Work([
-        'nameOfWork' => $request->string('nameOfWork'),
-    ]);
-
-    $work->save();
-
-    return redirect(route('enjoy-the-good'));
-})->name('assign-godly-work');
-
-Route::post('/works/{work}/effort', function (Work $work, Request $request) {
-    $effort = new Effort([
-        'summaryOfEffort' => $request->string('summaryOfEffort'),
-    ]);
-
-    $work->effort()->save($effort);
-
-    return redirect(route('enjoy-the-good'));
-})->name('enjoy-the-effort');
-
-Route::put('/works/{work}', function (Work $work, Request $request) {
-    $work->currentState = $request->get('currentState');
-
-    $work->save();
-
-    return redirect(route('enjoy-the-good'));
-})->name('change-the-current-state');
+Route::prefix('/works')->group(function () {
+    Route::name('enjoy-the-good-works')->get('', EnjoyTheGoodWorks::class);
+    Route::name('assign-godly-work')->post('', AssignGodlyWork::class);
+    Route::name('enjoy-the-effort')->post('/{work}/effort', EnjoyTheEffort::class);
+    Route::name('change-the-current-state')->put('/{work}', ChangeTheCurrentState::class);
+});

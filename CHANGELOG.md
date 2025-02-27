@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Refactor to invokable Controllers.
 - Upgraded Composer packages.
 - Upgraded Laravel framework.
 - Speed up Rector and PHPStan.
