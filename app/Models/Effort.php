@@ -9,14 +9,8 @@ class Effort extends Model
 {
     use HasUuids;
 
-    /**
-     * @var string
-     */
     const string CREATED_AT = 'toiledAt';
 
-    /**
-     * @var string
-     */
     const string UPDATED_AT = 'lastToiledAt';
 
     protected $fillable = ['summaryOfEffort'];

@@ -10,14 +10,8 @@ class Work extends Model
 {
     use HasUuids;
 
-    /**
-     * @var string
-     */
     const string CREATED_AT = 'assignedAt';
 
-    /**
-     * @var string
-     */
     const string UPDATED_AT = 'lastToiledAt';
 
     protected $fillable = ['nameOfWork'];
