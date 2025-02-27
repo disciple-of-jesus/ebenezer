@@ -18,6 +18,6 @@ class WalkByErectStones
             $listOfStones = $space->stonesOfRemembrance()->get();
         }
 
-        return view('space', ['space' => $space, 'stonesOfRemembrance' => $listOfStones]);
+        return inertia('WalkByErectedStones', ['space' => $space, 'stonesOfRemembrance' => $listOfStones]);
     }
 }

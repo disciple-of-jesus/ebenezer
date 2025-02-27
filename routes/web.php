@@ -9,7 +9,7 @@ use App\Http\Controllers\ErectStoneOfRemembrance;
 use App\Http\Controllers\WalkByErectStones;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => view('welcome'));
+Route::get('/', fn () => inertia('Welcome'));
 
 Route::prefix('/spaces')->group(function () {
     Route::name('assign-space-to-erect-stones')->post('', AssignSpaceToErectStones::class);

@@ -6,10 +6,13 @@
 
     <title>Ebenezer</title>
     <link rel="stylesheet" href="/dist/app.css">
+
+    @inertiaHead
 </head>
 <body class="has-background-primary-soft">
 <div class="container is-fluid pt-5 pb-5">
-    @yield('content')
+    @inertia
 </div>
 </body>
 </html>
+<script src="/dist/app.js"></script>
