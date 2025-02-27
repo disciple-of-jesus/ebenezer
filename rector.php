@@ -5,6 +5,7 @@ use RectorLaravel\Set\LaravelLevelSetList;
 
 return RectorConfig::configure()
     ->withAttributesSets(phpunit: true)
+    ->withCache(__DIR__.'/storage/framework/cache/rector')
     ->withImportNames(removeUnusedImports: true)
     ->withPaths([__DIR__.'/app', __DIR__.'/tests'])
     ->withPreparedSets(deadCode: true, codeQuality: true)

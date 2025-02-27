@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Upgraded Composer packages.
 - Upgraded Laravel framework.
+- Speed up Rector and PHPStan.
 
 ## 2025-02-05
 
