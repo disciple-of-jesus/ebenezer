@@ -70,3 +70,11 @@ Route::post('/works/{work}/effort', function (Work $work, Request $request) {
 
     return redirect(route('enjoy-the-good'));
 })->name('enjoy-the-effort');
+
+Route::put('/works/{work}', function (Work $work, Request $request) {
+    $work->currentState = $request->get('currentState');
+
+    $work->save();
+
+    return redirect(route('enjoy-the-good'));
+})->name('change-the-current-state');

@@ -1,3 +1,4 @@
+@php use App\CurrentState; @endphp
 @extends('layouts.default')
 
 @section('content')
@@ -23,6 +24,24 @@
                         @endforeach
                     </ul>
                 </div>
+                <form action="{{ route('change-the-current-state', [ 'work' => $work->id ]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <select name="currentState">
+                        <option value="TO_DO" @selected($work->currentState == CurrentState::TO_DO)>
+                            Te doen
+                        </option>
+                        <option value="DOING" @selected($work->currentState == CurrentState::DOING)>
+                            Bezig
+                        </option>
+                        <option value="DONE" @selected($work->currentState == CurrentState::DONE)>
+                            Gedaan
+                        </option>
+                    </select>
+
+                    <input class="button" id="changeCurrentState" type="submit"/>
+                </form>
                 <form action="{{ route('enjoy-the-effort', [ 'work' => $work->id]) }}" method="POST">
                     @csrf
 

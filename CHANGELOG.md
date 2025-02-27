@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 2025-02-27
 
+### Added
+
+- Simple implementation of changing the current state.
+
 ### Changed
 
 - Upgraded Composer packages.

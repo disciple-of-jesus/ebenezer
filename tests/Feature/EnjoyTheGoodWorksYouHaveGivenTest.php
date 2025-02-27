@@ -16,10 +16,14 @@ class EnjoyTheGoodWorksYouHaveGivenTest extends DuskTestCase
                 ->assertSee('(Goede) werken')
                 ->type('nameOfWork', 'Nieuwsbrief van Yachad versturen')
                 ->clickAndWaitForReload('#assignWork')
-                ->assertSee(text: 'Nieuwsbrief van Yachad versturen', ignoreCase: true)
+                ->assertSee('Nieuwsbrief van Yachad versturen', true)
+                ->assertSee('Te doen')
                 ->type('summaryOfEffort', 'Mail bekeken van Jan-Henk Soepenberg')
                 ->clickAndWaitForReload('#enjoyEffort')
+                ->select('currentState', 'DOING')
+                ->clickAndWaitForReload('#changeCurrentState')
                 ->assertSee('Mail bekeken van Jan-Henk Soepenberg')
+                ->assertSelected('currentState', 'DOING')
         );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\CurrentState;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,6 +15,8 @@ class Work extends Model
 
     const string UPDATED_AT = 'lastToiledAt';
 
+    protected $attributes = ['currentState' => CurrentState::TO_DO];
+
     protected $fillable = ['nameOfWork'];
 
     public function effort(): HasMany
@@ -24,6 +27,7 @@ class Work extends Model
     protected function casts(): array
     {
         return [
+            'currentState' => CurrentState::class,
             'nameOfWork' => 'encrypted',
         ];
     }
