@@ -10,6 +10,6 @@ class EnjoyTheGoodWorks
     {
         $works = Work::all();
 
-        return view('works', ['works' => $works]);
+        return inertia('EnjoyTheGoodWorks', ['works' => $works->load('effort')]);
     }
 }
