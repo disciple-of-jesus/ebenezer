@@ -10,13 +10,6 @@
         </div>
 
         <div class="field">
-          <label class="label" for="wayOfShowing">Manier</label>
-          <div class="control">
-            <input v-model="form.wayOfShowing" class="input" name="wayOfShowing" type="text"/>
-          </div>
-        </div>
-
-        <div class="field">
           <label class="label" for="contextToWord">Context</label>
           <div class="control">
             <textarea v-model="form.contextToWord" class="textarea" name="contextToWord"></textarea>
@@ -43,14 +36,6 @@
          class="box">
       <div class="content">
         <h1 class="is-uppercase">{{ stone.nameOfStone }}</h1>
-        <p class="is-italic">
-                    <span v-if="stone.erectedAt">
-                        Op {{ formatDate(stone.erectedAt) }} door {{ stone.wayOfShowing.toLowerCase() }}
-                    </span>
-          <span v-else>
-                        {{ stone.wayOfShowing }}
-                    </span>
-        </p>
         <p>{{ stone.contextToWord }}</p>
       </div>
     </div>
@@ -69,7 +54,6 @@ export default {
     return {
       form: {
         nameOfStone: '',
-        wayOfShowing: '',
         contextToWord: ''
       },
       query: ''

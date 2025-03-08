@@ -12,13 +12,11 @@ class ErectStoneOfRemembrance
     {
         $request->validate([
             'nameOfStone' => 'required',
-            'wayOfShowing' => 'required',
             'contextToWord' => 'required',
         ]);
 
         $stoneOfRemembrance = new StoneOfRemembrance([
             'nameOfStone' => $request->string('nameOfStone'),
-            'wayOfShowing' => $request->string('wayOfShowing'),
             'contextToWord' => $request->string('contextToWord'),
         ]);
 

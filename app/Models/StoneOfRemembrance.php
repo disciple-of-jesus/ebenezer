@@ -15,13 +15,12 @@ class StoneOfRemembrance extends Model
 
     protected $table = 'stones_of_remembrance';
 
-    protected $fillable = ['nameOfStone', 'wayOfShowing', 'contextToWord'];
+    protected $fillable = ['nameOfStone', 'contextToWord'];
 
     public function toSearchableArray(): array
     {
         return [
             'nameOfStone' => $this->nameOfStone,
-            'wayOfShowing' => $this->wayOfShowing,
             'contextToWord' => $this->contextToWord,
         ];
     }
